@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for row in content %}
+<article>
+  {{ row[1] }} <br>
+  {{ row[2] }} <br>
+  {{ row[3]/100 }}€
+</article>
+{% endfor %}
+{% endblock %}
+
+{% block aside %}
+<h3>News</h3>
+<ul>
+  <li>Punkt 1</li>
+  <li>Punkt 2</li>
+  <li>Punkt 3</li>
+  <li>Punkt 4</li>
+</ul>
+{% endblock %}
