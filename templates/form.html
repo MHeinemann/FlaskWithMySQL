@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% block content %} {% if message %} {{ message }} {% endif %}
+{% extends "base.html" %} {% block content %}
+{% if message %} {{ message }}
+  {{ name }}
+{% endif %}
 <article>
   <h3>Ein neues Gericht hinzufügen</h3>
   <form name="nameinput" action="{{ url_for('formValidate') }}" method="post">
