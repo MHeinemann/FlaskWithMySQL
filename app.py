@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, redirect, render_template, url_for, request
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
@@ -26,7 +26,8 @@ def about():
 
 @app.route('/form')
 def form():
-    return render_template('form.html')
+    message = request.args.get('message')
+    return render_template('form.html', message=message)
 
 @app.route('/formValidate', methods=['GET', 'POST'])
 def formValidate():
@@ -37,7 +38,7 @@ def formValidate():
         price = request.form.get('preis')
 
         if not name or not descr or not price:
-            message = "es wurden nicht alle Felder ausgefuellt"
+            message = "Es wurden nicht alle Felder ausgefüllt"
         else:
             message = "Eintragung vorgenommen"
             connection = mysql.get_db()
@@ -46,8 +47,7 @@ def formValidate():
             cursor.execute(query)
             connection.commit()
 
-
-    return render_template('form.html', message=message)
+    return redirect(url_for('form', message=message))
 
 if __name__ == '__main__':
     app.run(debug=True)
